@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1:3307
--- 產生時間： 2025-11-22 09:39:01
+-- 主機： 127.0.0.1
+-- 產生時間： 2025-11-22 14:01:28
 -- 伺服器版本： 10.4.32-MariaDB
--- PHP 版本： 8.2.12
+-- PHP 版本： 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,56 +18,94 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `management_system`
+-- 資料庫： `project`
 --
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `users`
+-- 資料表結構 `package`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `role` enum('admin','resident') NOT NULL
+CREATE TABLE `package` (
+  `package_id` int(255) NOT NULL,
+  `room` int(255) NOT NULL,
+  `student_name` varchar(30) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `arrive_time` datetime NOT NULL,
+  `receive_time` datetime DEFAULT NULL,
+  `state` varchar(10) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- 傾印資料表的資料 `users`
+-- 資料表結構 `public`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `name`, `role`) VALUES
-(1, 'admin1', '123', '管理員一號', 'admin'),
-(2, 'admin2', '456', '管理員二號', 'admin'),
-(3, 'resident1', '789', '住民一號', 'resident'),
-(4, 'resident2', '101112', '住民二號', 'resident'),
-(5, 'resident3', '131415', '住民三號', 'resident'),
-(6, 'resident4', '161718', '住民四號', 'resident'),
-(7, 'resident5', '192021', '住民五號', 'resident');
+CREATE TABLE `public` (
+  `public_id` int(255) NOT NULL,
+  `public_name` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL DEFAULT 'Y',
+  `borrow_time` datetime DEFAULT NULL,
+  `max_use_time` time NOT NULL,
+  `expected_return_time` datetime DEFAULT NULL,
+  `borrower_id` int(11) DEFAULT NULL,
+  `borrower_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `user`
+--
+
+CREATE TABLE `user` (
+  `account` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `role` char(1) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT 'U'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `user`
+--
+
+INSERT INTO `user` (`account`, `password`, `name`, `role`) VALUES
+('root', 'password', '管理員', 'R'),
+('student', 'pw4', '學生', 'S');
 
 --
 -- 已傾印資料表的索引
 --
 
 --
--- 資料表索引 `users`
+-- 資料表索引 `package`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+ALTER TABLE `package`
+  ADD PRIMARY KEY (`package_id`);
+
+--
+-- 資料表索引 `public`
+--
+ALTER TABLE `public`
+  ADD PRIMARY KEY (`public_id`);
+
+--
+-- 資料表索引 `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`account`);
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `users`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `package`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `package`
+  MODIFY `package_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
