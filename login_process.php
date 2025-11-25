@@ -33,5 +33,5 @@ if ($user && $user['password'] === $password) {
 } else {
     header('Location: index.php?error=1');
     exit;
-}
+}a
  
