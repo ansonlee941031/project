@@ -1,4 +1,4 @@
-/* week03/custom.css */
+/* --- 保留原有的 navbar 樣式 --- */
 .custom-bg {
   background-color: #204080 !important;
   color: #fff !important;
@@ -13,8 +13,61 @@
   color: #204080 !important;
   background: #fff !important;
 }
-.custom-bg {
-  background-color: #204080 !important;
-  color: #fff !important;
+
+body { 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    background: #f5f5f5; 
 }
- 
+.login-container { 
+    width: 360px; 
+    margin: 80px auto; 
+    padding: 20px; 
+    background: #fff; 
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.role-tabs { 
+    display: flex; 
+    border-bottom: 1px solid #ccc; 
+    margin-bottom: 15px; 
+}
+.role-tab { 
+    flex: 1; 
+    text-align: center; 
+    padding: 8px 0; 
+    cursor: pointer; 
+}
+.role-tab.active { 
+    font-weight: bold; 
+    border-bottom: 3px solid #007bff; 
+    color: #007bff;
+}
+label { 
+    display: block; 
+    margin-top: 10px; 
+}
+input[type=text], input[type=password] { 
+    width: 100%; 
+    padding: 8px; 
+    box-sizing: border-box; 
+    margin-top: 5px;
+}
+button[type=submit] { 
+    width: 100%; 
+    margin-top: 20px; 
+    padding: 10px; 
+    border: none; 
+    background: #007bff; 
+    color: #fff; 
+    font-weight: bold;
+    cursor: pointer;
+}
+button[type=submit]:hover {
+    background: #0056b3;
+}
+.error { 
+    color: #c00; 
+    margin-top: 15px; 
+    text-align: center; 
+    font-weight: bold;
+}
