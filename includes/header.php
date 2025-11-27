@@ -34,7 +34,7 @@ function nav_active($file) {
             <a class="nav-link<?=nav_active('property.php')?>" href="../public.php">公物管理</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link<?=nav_active('job.php')?>" href="../job.php">包裹公物狀態</a>
+            <a class="nav-link<?=nav_active('job.php')?>" href="../state.php">包裹公物狀態</a>
           </li>
         </ul>
 
