@@ -92,7 +92,7 @@ if (isset($_POST['return_item'])) {
 ?>
 
 <div class="container mt-4">
-    <h2>🛒 公物借出/歸還作業</h2> 
+    <h2> 公物借出/歸還作業</h2> 
     <p><a href="admin/dashboard.php">← 返回管理儀表板</a></p>
 
     <?php if ($message): ?>
