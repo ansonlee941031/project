@@ -19,7 +19,7 @@ if (isset($_POST['lend_item'])) {
     $borrower_name = htmlspecialchars($_POST['borrower_name'] ?? '');
     $expected_return_time = $_POST['expected_return_time'] ?? '';
 
-    // 確保物品目前狀態為 'Y' 
+    // SQL 檢查：確保物品目前狀態為 'Y' 
     $sql_check = "SELECT state, public_name FROM public WHERE public_id = ? LIMIT 1";
     $stmt_check = mysqli_prepare($conn, $sql_check);
     mysqli_stmt_bind_param($stmt_check, "i", $public_id);
@@ -28,7 +28,7 @@ if (isset($_POST['lend_item'])) {
     $item = mysqli_fetch_assoc($result_check);
 
     if ($item && $item['state'] === 'Y') {
-        // 更新狀態：Y -> N (已借出)
+        // 執行狀態更新：Y -> N (已借出)
         // 更新借用時間、預計歸還時間、借用人
         $sql_update = "UPDATE public SET 
                        state = 'N', 
@@ -65,7 +65,8 @@ if (isset($_POST['return_item'])) {
     $item = mysqli_fetch_assoc($result_check);
     
     if ($item && $item['state'] === 'N') {
-        //  更新狀態：N -> Y 
+        // B. 執行狀態更新：N -> Y 
+        // 清除借用相關欄位
         $sql_update = "UPDATE public SET 
                        state = 'Y', 
                        borrow_time = NULL, 
@@ -91,7 +92,7 @@ if (isset($_POST['return_item'])) {
 ?>
 
 <div class="container mt-4">
-    <h2>🛒 公物借出/歸還作業 (生產管理核心)</h2>
+    <h2>🛒 公物借出/歸還作業</h2> 
     <p><a href="admin/dashboard.php">← 返回管理儀表板</a></p>
 
     <?php if ($message): ?>
@@ -105,9 +106,8 @@ if (isset($_POST['return_item'])) {
             <div class="card shadow-sm h-100">
                 <div class="card-header bg-primary text-white fw-bold">1. 公物借出登記</div>
                 <div class="card-body">
-                    <p class="card-text">將物品狀態從 **在庫(Y)** 轉為 **已借出(N)**</p>
                     <form action="" method="POST">
-                        <label class="form-label">公物 ID (public_id):</label>
+                        <label class="form-label">公物 ID:</label>
                         <input type="number" name="public_id" class="form-control mb-2" required>
                         <label class="form-label">借用人姓名:</label>
                         <input type="text" name="borrower_name" class="form-control mb-2" required>
@@ -123,7 +123,6 @@ if (isset($_POST['return_item'])) {
             <div class="card shadow-sm h-100">
                 <div class="card-header bg-success text-white fw-bold">2. 公物歸還登記</div>
                 <div class="card-body">
-                    <p class="card-text">將物品狀態從 **已借出(N)** 轉回 **在庫(Y)**</p>
                     <form action="" method="POST">
                         <label class="form-label">歸還的公物 ID:</label>
                         <input type="number" name="public_id" class="form-control mb-3" required>
@@ -134,7 +133,3 @@ if (isset($_POST['return_item'])) {
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
