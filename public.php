@@ -1,7 +1,6 @@
 <?php
 session_start();
 require 'config/db.php'; 
-require 'includes/header.php'; 
 
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
     echo "<script>
@@ -11,8 +10,11 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-$message = '';
+// 如果沒有設定路徑變數，預設為空 (代表當前目錄)
+$path = ""; 
+require 'includes/header.php'; 
 
+$message = '';
 
 if (isset($_POST['lend_item'])) {
     $public_id = (int)($_POST['public_id'] ?? 0);
