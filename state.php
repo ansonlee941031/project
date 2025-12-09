@@ -4,7 +4,7 @@ require 'config/db.php';
 
 // 給 header.php 用的變數
 $title = "包裹 / 公物狀態總覽";
-$path  = ""; // state.php 在根目錄，所以不用 ../
+
 
 // 撈包裹資料
 $packageSql    = "SELECT * FROM package ORDER BY package_id ASC";
@@ -112,3 +112,4 @@ include 'includes/header.php';
         crossorigin="anonymous"></script>
 </body>
 </html>
+
