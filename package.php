@@ -190,7 +190,7 @@ if (isset($_POST['receive_package'])) {
                     <form action="" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label">學號 (Student ID):</label>
-                            <input type="number" name="student_id" class="form-control" required placeholder="將自動寄信至 學號@m365.fju.edu.tw">
+                            <input type="number" name="student_id" class="form-control" required placeholder="將自動寄信至學生m365信箱">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">學生姓名:</label>
