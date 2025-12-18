@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-11-22 16:03:37
+-- 產生時間： 2025-12-05 16:21:18
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.0.30
 
@@ -29,13 +29,25 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `package` (
   `package_id` int(255) NOT NULL,
-  `room` int(255) NOT NULL,
   `student_name` varchar(30) NOT NULL,
   `student_id` int(11) NOT NULL,
   `arrive_time` datetime NOT NULL,
   `receive_time` datetime DEFAULT NULL,
-  `state` varchar(10) NOT NULL DEFAULT 'N'
+  `state` varchar(10) NOT NULL DEFAULT 'N',
+  `image_path` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `package`
+--
+
+INSERT INTO `package` (`package_id`, `student_name`, `student_id`, `arrive_time`, `receive_time`, `state`, `image_path`) VALUES
+(3, '11', 0, '2025-12-05 22:43:00', NULL, 'N', NULL),
+(4, '11', 4124, '2025-12-05 22:55:00', NULL, 'N', NULL),
+(5, '11', 4124, '2025-12-05 22:55:00', NULL, 'N', NULL),
+(6, '11', 423435354, '2025-12-05 22:57:00', '2025-12-05 22:58:19', 'Y', NULL),
+(7, '11', 4124, '2025-12-05 22:55:00', NULL, 'N', NULL),
+(8, '11', 414354646, '2025-12-05 23:18:00', NULL, 'N', 'uploads/1764947917_ㄇ.jpg');
 
 -- --------------------------------------------------------
 
@@ -59,7 +71,7 @@ CREATE TABLE `public` (
 --
 -- 資料表結構 `users`
 --
- 
+
 CREATE TABLE `users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
@@ -105,10 +117,9 @@ ALTER TABLE `users`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `package`
 --
 ALTER TABLE `package`
-  MODIFY `package_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `package_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
- 
