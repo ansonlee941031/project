@@ -136,6 +136,7 @@ if (isset($_POST['receive_package'])) {
     $stmt_check = mysqli_prepare($conn, $sql_check);
     if ($stmt_check === false) { die("資料庫錯誤: " . mysqli_error($conn)); }
 
+    // SQL查詢
     mysqli_stmt_bind_param($stmt_check, "i", $package_id);
     mysqli_stmt_execute($stmt_check);
     $result_check = mysqli_stmt_get_result($stmt_check);
