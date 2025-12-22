@@ -57,7 +57,7 @@ if ($resPublicBorrowed) {
 
 $availablePublic = $totalPublic - $borrowedPublic;
 
- JavaScript 的數據 
+  
 ?>
 
 <div class="container mt-4">
