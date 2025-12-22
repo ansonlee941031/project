@@ -18,6 +18,7 @@ $message = '';
 
 if (isset($_POST['lend_item'])) {
     $public_id = (int)($_POST['public_id'] ?? 0);
+    $borrower_id = htmlspecialchars($_POST['borrower_id'] ?? '');
     $borrower_name = htmlspecialchars($_POST['borrower_name'] ?? '');
     $expected_return_time = $_POST['expected_return_time'] ?? '';
 
@@ -36,11 +37,12 @@ if (isset($_POST['lend_item'])) {
                        state = 'N', 
                        borrow_time = NOW(), 
                        expected_return_time = ?, 
+                       borrower_id = ?,
                        borrower_name = ? 
                        WHERE public_id = ?";
         
         $stmt_update = mysqli_prepare($conn, $sql_update);
-        mysqli_stmt_bind_param($stmt_update, "ssi", $expected_return_time, $borrower_name, $public_id);
+        mysqli_stmt_bind_param($stmt_update, "sssi", $expected_return_time, $borrower_id, $borrower_name, $public_id);
         
         if (mysqli_stmt_execute($stmt_update)) {
             $message = "success: 公物【{$item['public_name']}】借出成功，狀態已更新為『已借出 (N)』！";
@@ -73,6 +75,7 @@ if (isset($_POST['return_item'])) {
                        state = 'Y', 
                        borrow_time = NULL, 
                        expected_return_time = NULL, 
+                       borrower_id = NULL,
                        borrower_name = NULL 
                        WHERE public_id = ?";
         
@@ -111,10 +114,12 @@ if (isset($_POST['return_item'])) {
                     <form action="" method="POST">
                         <label class="form-label">公物 ID:</label>
                         <input type="number" name="public_id" class="form-control mb-2" required>
+                        <label class="form-label">借用人學號:</label>
+                        <input type="text" name="borrower_id" class="form-control mb-2" required>
                         <label class="form-label">借用人姓名:</label>
                         <input type="text" name="borrower_name" class="form-control mb-2" required>
                         <label class="form-label">預計歸還日期:</label>
-                        <input type="date" name="expected_return_time" class="form-control mb-3" required>
+                        <input type="datetime-local"name="expected_return_time" class="form-control mb-3" required>
                         <button type="submit" name="lend_item" class="btn btn-success w-100">確認借出</button>
                     </form>
                 </div>
