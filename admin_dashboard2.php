@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// 權限檢查必須在最前面
+// 權限檢查
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
     header('Location: ../index.php');
     exit;
@@ -10,11 +10,11 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
 // 引入資料庫連線，用於圖表數據查詢
 require '../config/db.php'; 
 
-// *** 【修正：定義頁面標題，確保顯示正確】 ***
+
 $title = "管理員儀表板 | 數據總覽"; 
 // ****************************
 
-// 引入 header 檔案
+// 引入 header 
 $path = "../"; 
 require '../includes/header.php'; 
 
@@ -57,7 +57,7 @@ if ($resPublicBorrowed) {
 
 $availablePublic = $totalPublic - $borrowedPublic;
 
-// --- 2. 準備給 JavaScript 的數據 (PHP 部分結束) ---
+ JavaScript 的數據 
 ?>
 
 <div class="container mt-4">
@@ -67,8 +67,8 @@ $availablePublic = $totalPublic - $borrowedPublic;
             <h5 class="text-muted">哈囉，<?php echo htmlspecialchars($_SESSION['name']); ?>！</h5>
         </div>
         <div class="text-end">
-            <p class="mb-0">📦 **包裹總數：** <?= $totalPackages; ?> 件</p>
-            <p class="mb-0">🛒 **公物總數：** <?= $totalPublic; ?> 件</p>
+            <p class="mb-0"> **包裹總數：** <?= $totalPackages; ?> 件</p>
+            <p class="mb-0"> **公物總數：** <?= $totalPublic; ?> 件</p>
         </div>
     </div>
 
@@ -131,7 +131,7 @@ $availablePublic = $totalPublic - $borrowedPublic;
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 <script>
-// --- 1. PHP 變數轉為 JavaScript 變數 (實現數據即時性) ---
+// --- 1. PHP 變數轉為 JavaScript 變數 
 const received = <?= $receivedPackages; ?>;
 const notReceived = <?= $notReceivedPackages; ?>;
 const borrowed = <?= $borrowedPublic; ?>;
